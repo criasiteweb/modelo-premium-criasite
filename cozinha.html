@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Cozinha (KDS) | Forno Nobre</title>
+<link rel="icon" href="assets/img/logo.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/cozinha.css" />
+<script type="module" src="assets/js/cozinha.js" defer></script>
+</head>
+<body>
+<header class="kd-topo">
+  <a class="kd-voltar" href="painel.html">← Painel</a>
+  <h1>Cozinha</h1>
+  <span class="kd-relogio" data-relogio>--:--</span>
+</header>
+
+<div class="kd-login" data-login hidden>
+  <form data-form-login>
+    <h2>Acesso da loja</h2>
+    <input type="password" placeholder="Senha do painel" data-senha autocomplete="current-password" />
+    <button type="submit">Entrar</button>
+    <p class="kd-erro" data-erro hidden></p>
+  </form>
+</div>
+
+<main class="kd-board" data-board hidden>
+  <section class="kd-col" data-col="novo">
+    <h2>🆕 Na fila <span data-conta-novo>0</span></h2>
+    <div class="kd-cards" data-cards-novo></div>
+  </section>
+  <section class="kd-col" data-col="preparo">
+    <h2>🔥 Em preparo <span data-conta-preparo>0</span></h2>
+    <div class="kd-cards" data-cards-preparo></div>
+  </section>
+  <section class="kd-col" data-col="pronto">
+    <h2>✅ Pronto <span data-conta-pronto>0</span></h2>
+    <div class="kd-cards" data-cards-pronto></div>
+  </section>
+</main>
+</body>
+</html>
