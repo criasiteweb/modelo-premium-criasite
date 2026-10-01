@@ -275,7 +275,7 @@ function escutarPedidos() {
     marcarConexao(false);
     console.error(erro);
     el("[data-lista]").innerHTML =
-      `<p class="vazio">Perdi a conexão com o servidor de pedidos. Verifique a internet — assim que voltar, os pedidos aparecem sozinhos.</p>`;
+      `<p class="vazio">${motivoDaFalha(erro)}</p>`;
   });
 }
 
@@ -315,6 +315,22 @@ function escutarPedidosDaMesa() {
 function numerarDoDia() {
   const totalHoje = pedidos.length;
   pedidos.forEach((p, i) => { p.numero = String(totalHoje - i).padStart(3, "0"); });
+}
+
+/* Dizer só "sem conexão" esconde a causa e faz a gente procurar defeito no
+   lugar errado. Aqui o painel conta o que de fato aconteceu, em português,
+   para quem está no balcão e para quem vai dar manutenção. */
+function motivoDaFalha(erro) {
+  const cod = String((erro && erro.code) || "");
+  if (cod === "permission-denied")
+    return "O servidor recusou o acesso a esta loja. Isso é permissão, não internet. Avise a Cria Site.";
+  if (cod === "failed-precondition")
+    return "O servidor pediu um índice que ainda não existe. Avise a Cria Site.";
+  if (cod === "unauthenticated")
+    return "A sessão caiu. Saia e entre de novo com a senha da loja.";
+  if (cod === "unavailable")
+    return "Perdi a conexão com o servidor de pedidos. Assim que a internet voltar, os pedidos aparecem sozinhos.";
+  return "Não consegui falar com o servidor de pedidos (" + (cod || "motivo desconhecido") + "). Avise a Cria Site.";
 }
 
 function marcarConexao(ok) {
