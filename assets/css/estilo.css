@@ -651,3 +651,17 @@ em{font-style:normal;color:var(--amarelo)}
   border:5px solid transparent;border-left-color:#fff}
 .mascote.mostrar .mascote__balao{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.mascote__corpo,.mascote__braco,.pupila{animation:none}}
+
+/* ===================== VIDA NO TOPO (nosso modelo) ===================== */
+@media (prefers-reduced-motion:no-preference){
+  .capa-foto img{animation:fnKen 22s ease-in-out infinite alternate}
+  @keyframes fnKen{from{transform:scale(1)}to{transform:scale(1.14)}}
+  .capa-conteudo>*{opacity:0;transform:translateY(18px);animation:fnSobe .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .capa-logo{animation-delay:.05s}
+  .capa .chamada{animation-delay:.18s}
+  .capa h1{animation-delay:.3s}
+  .capa .sub{animation-delay:.44s}
+  .capa .selos{animation-delay:.58s}
+  .capa-conteudo>a,.capa-conteudo>button{animation-delay:.72s}
+  @keyframes fnSobe{to{opacity:1;transform:none}}
+}
