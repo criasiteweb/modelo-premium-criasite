@@ -74,3 +74,9 @@ cliente, senão este site passa a mostrar o cardápio do cliente errado.
 - `NONNA10` — 10% de desconto em pedidos a partir de R$ 60,00.
 - `PRIMEIRA` — R$ 8,00 de desconto em pedidos a partir de R$ 50,00.
 - `ENTREGAGRATIS` — entrega grátis em pedidos a partir de R$ 90,00.
+
+## Acesso ao painel (demonstração)
+- Site: https://criasiteweb.github.io/modelo-premium-criasite/
+- Painel: https://criasiteweb.github.io/modelo-premium-criasite/painel.html
+- Login da loja: criasite.site@gmail.com  /  senha: FornoNobre2026
+- Servidor próprio do modelo: projeto Firebase "forno-nobre-modelo" (não tem relação com Vitória nem Rei Burgão).
