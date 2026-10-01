@@ -1253,6 +1253,29 @@ async function enviarPedido(e) {
     `${bairroEscolhido()} — ${$("[data-cidade]").value}`
   ].filter(Boolean).join(" — ");
 
+  /* ---- Pix que confirma sozinho ----
+     Só entra quando o cliente escolheu Pix e o total já é conhecido
+     (entrega com taxa a combinar não tem valor fechado para cobrar).
+     Se o cofre estiver fora do ar, o pedido segue pelo caminho antigo,
+     com a chave na tela e o comprovante no WhatsApp: nunca trava. */
+  let pagamentoTexto = f.pagamento.value
+    + (f.pagamento.value === "Dinheiro" && f.troco.value.trim() ? ` (troco para ${f.troco.value.trim()})` : "");
+
+  if (f.pagamento.value === "Pix" && window.cobrarPixAutomatico
+      && (tipo !== "Entrega" || taxa !== null)) {
+    st.dataset.erro = "false";
+    st.textContent = "Gerando o Pix…";
+    const resultado = await window.cobrarPixAutomatico(totalDoPedido(), "pedido-" + Date.now());
+    if (resultado === "pago") {
+      pagamentoTexto = "Pix PAGO pelo site";
+    } else if (resultado === "desistiu") {
+      st.textContent = "Pedido não enviado. Pague o Pix ou escolha outra forma de pagamento.";
+      st.dataset.erro = "true";
+      return;
+    }
+    /* "indisponivel" cai aqui e segue o fluxo antigo, sem travar o cliente */
+  }
+
   const msg = [
     `*PEDIDO — ${LOJA.nome}*`,
     "",
@@ -1267,7 +1290,7 @@ async function enviarPedido(e) {
     `*WhatsApp:* ${formatarFone(f.fone.value)}`,
     `*Como receber:* ${tipo}`,
     tipo === "Entrega" ? `*Endereço:* ${enderecoCheio}` : "",
-    `*Pagamento:* ${f.pagamento.value}${f.pagamento.value === "Dinheiro" && f.troco.value.trim() ? ` (troco para ${f.troco.value.trim()})` : ""}`,
+    `*Pagamento:* ${pagamentoTexto}`,
     f.obs.value.trim() ? `*Observações:* ${f.obs.value.trim()}` : "",
     fechouCartao ? `*CARTÃO FIDELIDADE COMPLETO* — o cliente tem direito a ${FIDELIDADE.premio}.` : "",
     (f.agendar && f.agendar.checked && f.agendaQuando.value.trim()) ? `*AGENDADO PARA:* ${f.agendaQuando.value.trim()}` : "",
@@ -1288,7 +1311,7 @@ async function enviarPedido(e) {
       fone: formatarFone(f.fone.value),
       tipo,
       endereco: tipo === "Entrega" ? enderecoCheio : "",
-      pagamento: f.pagamento.value + (f.pagamento.value === "Dinheiro" && f.troco.value.trim() ? ` (troco para ${f.troco.value.trim()})` : ""),
+      pagamento: pagamentoTexto,
       total: totalDoPedido(),
       taxa: taxa || 0,
       itens: carrinho.reduce((s, l) => s + l.q, 0)

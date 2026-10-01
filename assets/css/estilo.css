@@ -697,3 +697,9 @@ em{font-style:normal;color:var(--amarelo)}
 .agendar-check{display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.95rem}
 .agendar-check input{width:20px;height:20px;accent-color:var(--marca)}
 [data-agenda-quando]{margin-top:.5rem;width:100%;padding:.7rem .8rem;border:1px solid var(--linha,#2d2622);border-radius:10px;background:#15110f;color:inherit;font-size:1rem}
+
+/* ---- Pix que confirma sozinho ---- */
+.pix-qr{display:block;width:200px;max-width:70%;margin:.8rem auto;border-radius:12px;background:#fff;padding:.5rem}
+.pix-aguardando{margin:.7rem 0 .4rem;font-weight:700;font-size:1rem}
+.pix-aguardando[data-pago="true"]{color:#2ecc71}
+.pix-box [data-pix-desistir]{width:100%;font-size:.95rem}
