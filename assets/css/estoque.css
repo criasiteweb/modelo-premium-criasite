@@ -1,4 +1,5 @@
 :root{--bg:#141210;--card:#1f1b18;--linha:#2d2622;--tinta:#f3ede9;--muted:#b7aea8;--marca:#e63022;--ok:#2ecc71}
+[hidden]{display:none !important}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tinta);font:16px/1.5 Inter,system-ui,sans-serif}
 .es-topo{display:flex;align-items:center;gap:1rem;padding:1rem 1.1rem;border-bottom:1px solid var(--linha);position:sticky;top:0;background:var(--bg);z-index:5}
