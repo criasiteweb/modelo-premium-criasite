@@ -7,6 +7,7 @@
    ========================================================= */
 
 const LOJA = {
+  freteGratis: 70.00,   // acima disso, entrega grátis (marketing)
   nome: "Forno Nobre",
   /* DEMONSTRAÇÃO: WhatsApp comercial da Criasiteweb.
      Na venda, trocar pelo WhatsApp real da pizzaria. */
@@ -183,7 +184,7 @@ const MESA_ATUAL = new URLSearchParams(location.search).get("mesa");
    deixar aqui o projeto de outro cliente, senão este site
    passa a mostrar o cardápio do cliente errado.
    ========================================================= */
-const PROJETO_SERVIDOR = "TROCAR";
+const PROJETO_SERVIDOR = "forno-nobre-modelo";
 const TEM_SERVIDOR = PROJETO_SERVIDOR && PROJETO_SERVIDOR !== "TROCAR";
 const urlServidor = doc =>
   `https://firestore.googleapis.com/v1/projects/${PROJETO_SERVIDOR}/databases/(default)/documents/publico/${doc}`;
@@ -307,6 +308,17 @@ function montarCardapio() {
         <div class="lista-itens">${itens.map(cartaoItem).join("")}</div>
       </div>`;
   }).join("");
+
+  /* Faixa "Mais vendidos" no topo (marketing). Itens com top:true. */
+  const tops = CARDAPIO.filter(i => i.top && !i.off);
+  if (tops.length) {
+    const faixa = `
+      <div class="mais-vendidos">
+        <div class="grupo-topo"><h3>🔥 Mais vendidos</h3><span>os queridinhos da casa</span></div>
+        <div class="mv-trilho">${tops.map(cartaoItem).join("")}</div>
+      </div>`;
+    alvo.insertAdjacentHTML("afterbegin", faixa);
+  }
 
   let filtroAtivo = "todos";
   filtros.addEventListener("click", e => {
@@ -807,6 +819,17 @@ function pintarCarrinho() {
   }
   const t = subtotal();
   $("[data-subtotal]").textContent = reais(t);
+  (function(){
+    const el = document.querySelector("[data-frete]");
+    const meta = LOJA.freteGratis || 0;
+    if (!el || !meta || t <= 0) { if (el) el.hidden = true; return; }
+    el.hidden = false;
+    const falta = Math.max(0, meta - t);
+    const pct = Math.min(100, t / meta * 100);
+    el.innerHTML = falta > 0
+      ? `<div class="fm-txt">Faltam <b>${reais(falta)}</b> para <b>frete grátis</b></div><div class="fm-bar"><i style="width:${pct}%"></i></div>`
+      : `<div class="fm-ok">Você ganhou <b>frete grátis</b></div>`;
+  })();
   pintarDesconto();
   $("[data-total-flutuante]").textContent = reais(t);
   if (typeof atualizarTaxa === "function") atualizarTaxa();

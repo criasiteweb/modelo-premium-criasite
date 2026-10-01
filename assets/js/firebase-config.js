@@ -1,17 +1,17 @@
 /* =========================================================
-   MODELO PREMIUM — ligação com o servidor de pedidos (Firebase)
+   Forno Nobre (modelo premium) — servidor de pedidos próprio
    Criasiteweb
 
-   DESLIGADO de propósito. Este é um modelo de demonstração e NÃO
-   pode tocar no servidor de nenhum cliente. Ao criar um cliente novo,
-   trocar estas chaves pelo projeto Firebase próprio dele.
+   Projeto Firebase EXCLUSIVO deste modelo (forno-nobre-modelo).
+   Não tem nada a ver com Vitória nem Rei Burgão.
+   Ao criar um cliente real, trocar por um projeto próprio dele.
    ========================================================= */
 export const FIREBASE_CONFIG = {
-  apiKey: "TROCAR",
-  authDomain: "TROCAR",
-  projectId: "TROCAR",
-  storageBucket: "TROCAR",
-  messagingSenderId: "TROCAR",
-  appId: "TROCAR"
+  apiKey: "AIzaSyDtiK4StcGID26jCwEzCf4g14pAhm5MVNY",
+  authDomain: "forno-nobre-modelo.firebaseapp.com",
+  projectId: "forno-nobre-modelo",
+  storageBucket: "forno-nobre-modelo.firebasestorage.app",
+  messagingSenderId: "21959080064",
+  appId: "1:21959080064:web:e94dab2915336b928d0e65"
 };
-export const CONTA_LOJA = "TROCAR";
+export const CONTA_LOJA = "criasite.site@gmail.com";
