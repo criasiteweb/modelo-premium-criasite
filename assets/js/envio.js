@@ -29,7 +29,7 @@ const esperar = ms => new Promise(r => setTimeout(r, ms));
    continua abrindo de qualquer jeito, então o pedido nunca some. */
 window.enviarParaPainel = async function (dados, tentativa = 1) {
   try {
-    await addDoc(collection(db, "pedidos"), {
+    const ref = await addDoc(collection(db, "pedidos"), {
       criadoEm: serverTimestamp(),
       status:   "novo",
       impresso: false,
@@ -43,7 +43,8 @@ window.enviarParaPainel = async function (dados, tentativa = 1) {
       taxa:     Number(dados.taxa) || 0,
       itens:    Number(dados.itens) || 0
     });
-    return true;
+    window.ultimoPedidoId = ref.id;        // pro link de acompanhamento
+    return ref.id;
   } catch (err) {
     if (tentativa < 3) {
       await esperar(tentativa * 1200);          // 1,2s e depois 2,4s

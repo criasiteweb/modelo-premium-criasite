@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Acompanhar pedido | Forno Nobre</title>
+<link rel="icon" href="assets/img/logo.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/acompanhar.css" />
+<script type="module" src="assets/js/acompanhar.js" defer></script>
+</head>
+<body>
+<main class="ac-wrap">
+  <img class="ac-logo" src="assets/img/logo.svg" width="72" height="72" alt="Forno Nobre" />
+  <h1>Acompanhe seu pedido</h1>
+  <p class="ac-sub" data-sub>Carregando…</p>
+
+  <div class="ac-linha" data-linha hidden>
+    <div class="ac-passo" data-passo="novo"><span class="ac-bolha">1</span><b>Recebido</b></div>
+    <div class="ac-barra"><i data-barra></i></div>
+    <div class="ac-passo" data-passo="preparo"><span class="ac-bolha">2</span><b>Em preparo</b></div>
+    <div class="ac-barra"><i data-barra2></i></div>
+    <div class="ac-passo" data-passo="pronto"><span class="ac-bolha">3</span><b>Pronto</b></div>
+  </div>
+
+  <div class="ac-card" data-card hidden></div>
+  <a class="ac-voltar" href="index.html">← Voltar ao cardápio</a>
+</main>
+</body>
+</html>

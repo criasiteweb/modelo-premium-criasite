@@ -1203,7 +1203,7 @@ function atualizarTotais() {
   if (flut) flut.textContent = reais(totalDoPedido());
 }
 
-function enviarPedido(e) {
+async function enviarPedido(e) {
   e.preventDefault();
   const f = e.target;
   const st = $("[data-status]");
@@ -1282,7 +1282,7 @@ function enviarPedido(e) {
   /* manda uma cópia para o painel da loja (painel.html), que apita
      no balcão e imprime. Se falhar, o WhatsApp abaixo segue normal. */
   if (window.enviarParaPainel) {
-    window.enviarParaPainel({
+    await window.enviarParaPainel({
       texto: msg,
       cliente: f.nome.value.trim(),
       fone: formatarFone(f.fone.value),
@@ -1383,6 +1383,7 @@ function mostrarConfirmacao(nome, modoMesa) {
          Em instantes a gente confirma por WhatsApp com o tempo de preparo.</p>
       <p class="confirmado-dica">Não abriu o WhatsApp? Toque no botão abaixo.</p>
       <a class="confirmado-btn" href="https://wa.me/${LOJA.whatsapp}" target="_blank" rel="noopener">Abrir o WhatsApp da loja</a>
+      ${window.ultimoPedidoId ? `<a class="confirmado-btn confirmado-acompanhar" href="acompanhar.html?id=${window.ultimoPedidoId}">📍 Acompanhar meu pedido</a>` : ""}
       <button type="button" class="confirmado-fechar">Fechar</button>
     </div>`;
   document.body.appendChild(caixa);

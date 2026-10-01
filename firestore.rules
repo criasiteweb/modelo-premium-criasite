@@ -41,7 +41,8 @@ service cloud.firestore {
 
     match /pedidos/{pedido} {
       allow create: if pedidoValido(request.resource.data);
-      allow get, list: if ehALoja();
+      allow get: if true;            /* o cliente acompanha o PRÓPRIO pedido pelo id (aleatório) */
+      allow list: if ehALoja();     /* listar todos, só a loja */
       /* a loja só mexe no andamento do pedido, nunca no conteúdo */
       allow update: if ehALoja()
                     && request.resource.data.diff(resource.data)
@@ -89,7 +90,8 @@ service cloud.firestore {
 
     match /pedidos_mesa/{pedido} {
       allow create: if pedidoMesaValido(request.resource.data);
-      allow get, list: if ehALoja();
+      allow get: if true;            /* o cliente acompanha o PRÓPRIO pedido pelo id (aleatório) */
+      allow list: if ehALoja();     /* listar todos, só a loja */
       allow update: if ehALoja()
                     && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']);
       allow delete: if ehALoja();
