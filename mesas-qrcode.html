@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>QR Code das mesas para imprimir | Forno Nobre</title>
+<link rel="icon" href="assets/img/favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#120C0A;color:#F1EBE1;font-family:"Inter",system-ui,sans-serif;padding:32px 18px 64px}
+  .topo{max-width:1000px;margin:0 auto 28px;text-align:center}
+  .topo h1{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:30px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.02em}
+  .topo p{margin:0;opacity:.62;font-size:14px;line-height:1.5}
+  .grade{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .cartao{
+    position:relative;background:#1B1310;border:1px solid rgba(255,255,255,.08);border-radius:24px;
+    padding:0 0 20px;text-align:center;overflow:hidden;
+    break-inside:avoid;page-break-inside:avoid;
+    box-shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+  .cartao .faixa{background:linear-gradient(135deg,#D42A20,#E8493C);padding:18px 16px 34px;position:relative}
+  .cartao .faixa .mesa{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:34px;color:#fff;
+    letter-spacing:.02em;text-transform:uppercase;line-height:1}
+  .cartao .faixa .mesa small{display:block;font-family:"Inter",sans-serif;font-size:11px;font-weight:800;
+    letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:4px}
+  .cartao .logo{width:56px;height:56px;border-radius:50%;border:3px solid #1B1310;
+    position:absolute;left:50%;bottom:-28px;transform:translateX(-50%);
+    box-shadow:0 6px 16px rgba(0,0,0,.4);background:#1B1310}
+  .cartao .corpo{padding:38px 18px 0}
+  .cartao .sub{margin:0 0 14px;font-size:12px;font-weight:700;color:rgba(241,235,225,.65);line-height:1.4}
+  .qr{background:#fff;border-radius:14px;padding:10px;display:inline-block}
+  .qr svg{display:block;width:150px;height:150px}
+  .cartao .rodape{margin:14px 0 0;font-size:11px;font-weight:700;color:rgba(241,235,225,.5)}
+  .fora{max-width:1000px;margin:28px auto 0;text-align:center;color:rgba(241,235,225,.65);font-size:14px;line-height:1.6}
+  .fora button{margin-top:12px;padding:13px 24px;border-radius:999px;border:0;cursor:pointer;
+    background:#D42A20;color:#fff;font:800 15px/1 "Inter",sans-serif}
+  @media print{
+    body{background:#fff;padding:0}
+    .fora{display:none}
+    .topo{display:none}
+    .grade{gap:14px;padding:14px}
+    .cartao{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<div class="topo">
+  <h1>QR Code das mesas</h1>
+  <p>Mesmo QR Code em todos os cartões (é só um link). O número em cada cartão é pra pessoa saber qual mesa digitar ao abrir.</p>
+</div>
+
+<div class="grade" data-grade></div>
+
+<div class="fora">
+  <p>Imprima, recorte e cole um cartão em cada mesa. Funciona em papel A4 comum.</p>
+  <button type="button" onclick="window.print()">🖨️ Imprimir todas as mesas</button>
+</div>
+
+<script src="assets/js/qrcode-lib.js"></script>
+<script>
+(function () {
+  var link = location.href.replace(/[^/]*$/, "") + "restaurante.html";
+  var grade = document.querySelector("[data-grade]");
+  var html = "";
+  for (var n = 1; n <= 13; n++) {
+    html += '<div class="cartao">' +
+      '<div class="faixa"><span class="mesa"><small>Forno Nobre</small>Mesa ' + n + '</span>' +
+        '<img class="logo" src="assets/img/logo.jpg" alt="Forno Nobre" /></div>' +
+      '<div class="corpo">' +
+        '<p class="sub">Aponte a câmera e digite<br />o número desta mesa</p>' +
+        '<div class="qr" data-qr="' + n + '"></div>' +
+        '<p class="rodape">Peça quantas vezes quiser · a conta fecha no final</p>' +
+      '</div>' +
+      '</div>';
+  }
+  grade.innerHTML = html;
+  var qr = qrcode(0, "H");   // correção de erro alta: aguenta gordura e amassado na mesa
+  qr.addData(link);
+  qr.make();
+  var svg = qr.createSvgTag(4);
+  for (var m = 1; m <= 13; m++) {
+    document.querySelector('[data-qr="' + m + '"]').innerHTML = svg;
+  }
+})();
+</script>
+
+</body>
+</html>
