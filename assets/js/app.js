@@ -1270,6 +1270,7 @@ function enviarPedido(e) {
     `*Pagamento:* ${f.pagamento.value}${f.pagamento.value === "Dinheiro" && f.troco.value.trim() ? ` (troco para ${f.troco.value.trim()})` : ""}`,
     f.obs.value.trim() ? `*Observações:* ${f.obs.value.trim()}` : "",
     fechouCartao ? `*CARTÃO FIDELIDADE COMPLETO* — o cliente tem direito a ${FIDELIDADE.premio}.` : "",
+    (f.agendar && f.agendar.checked && f.agendaQuando.value.trim()) ? `*AGENDADO PARA:* ${f.agendaQuando.value.trim()}` : "",
     "",
     "_Pedido enviado pelo site._"
   ].filter(l => l !== "").join("\n");
@@ -1694,4 +1695,12 @@ document.addEventListener("DOMContentLoaded", () => {
     try { await navigator.clipboard.writeText(LOJA.pix||""); btn.textContent="Copiado!"; setTimeout(()=>btn.textContent="Copiar",1500); }
     catch(e){ btn.textContent="Copie manualmente"; }
   });
+})();
+
+/* ---- Agendar pedido ---- */
+(function(){
+  const form = document.querySelector("[data-checkout]");
+  if(!form || !form.agendar) return;
+  const campo = form.querySelector("[data-agenda-quando]");
+  form.agendar.addEventListener("change", ()=>{ campo.hidden = !form.agendar.checked; if(form.agendar.checked) campo.focus(); });
 })();

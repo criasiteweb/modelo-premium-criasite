@@ -691,3 +691,9 @@ em{font-style:normal;color:var(--amarelo)}
 .pix-chave code{flex:1;background:rgba(0,0,0,.25);padding:.5rem .6rem;border-radius:8px;font-size:.85rem;word-break:break-all}
 .pix-copiar{background:#e63022;color:#fff;border:0;border-radius:8px;padding:.5rem .9rem;font-weight:600;cursor:pointer;flex:none}
 .pix-box small{display:block;margin-top:.5rem;color:var(--muted,#b7aea8);font-size:.78rem}
+
+/* ===================== AGENDAR PEDIDO ===================== */
+.agendar-box{margin:.6rem 0}
+.agendar-check{display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.95rem}
+.agendar-check input{width:20px;height:20px;accent-color:var(--marca)}
+[data-agenda-quando]{margin-top:.5rem;width:100%;padding:.7rem .8rem;border:1px solid var(--linha,#2d2622);border-radius:10px;background:#15110f;color:inherit;font-size:1rem}
