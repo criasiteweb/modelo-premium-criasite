@@ -630,3 +630,24 @@ em{font-style:normal;color:var(--amarelo)}
   box-shadow:0 6px 16px rgba(233,169,60,.35)}
 .fid-conta{font-size:1rem;font-weight:700;color:var(--amarelo-forte)}
 .fid-regra{margin-top:.5rem;font-size:.8rem;color:var(--texto-suave);line-height:1.45}
+
+/* ===================== MASCOTE (Cria Site) ===================== */
+.mascote{position:fixed;right:1rem;bottom:calc(5.4rem + env(safe-area-inset-bottom));z-index:60;
+  background:none;border:0;cursor:pointer;filter:drop-shadow(0 8px 16px rgba(0,0,0,.3))}
+.mascote__svg{display:block}
+.mascote__corpo{transform-origin:60px 112px;animation:fnFlutua 3s ease-in-out infinite}
+@keyframes fnFlutua{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+.mascote__braco{transform-origin:96px 64px;animation:fnAcena 3s ease-in-out infinite}
+@keyframes fnAcena{0%,70%,100%{transform:rotate(0)}80%{transform:rotate(-24deg)}90%{transform:rotate(-8deg)}}
+.mascote .pupila{transform-box:fill-box;transform-origin:center;animation:fnPisca 4s infinite}
+@keyframes fnPisca{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.mascote:active .mascote__corpo{animation:fnPulo .4s}
+@keyframes fnPulo{0%,100%{transform:translateY(0)}40%{transform:translateY(-16px) scale(1.05)}}
+.mascote__balao{position:absolute;right:88px;top:14px;white-space:nowrap;
+  background:#fff;color:#1a1a1a;font-weight:700;font-size:.85rem;padding:.45rem .8rem;
+  border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.25);opacity:0;transform:translateX(8px);
+  transition:all .3s;pointer-events:none}
+.mascote__balao::after{content:"";position:absolute;right:-6px;top:50%;margin-top:-5px;
+  border:5px solid transparent;border-left-color:#fff}
+.mascote.mostrar .mascote__balao{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.mascote__corpo,.mascote__braco,.pupila{animation:none}}
