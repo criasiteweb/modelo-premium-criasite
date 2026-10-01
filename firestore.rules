@@ -114,6 +114,11 @@ service cloud.firestore {
     }
 
     /* qualquer outro caminho fica fechado */
+
+    /* Estoque e ficha técnica — só a loja */
+    match /estoque_insumos/{doc} { allow read, write: if ehALoja(); }
+    match /estoque_fichas/{doc}  { allow read, write: if ehALoja(); }
+
     match /{documento=**} {
       allow read, write: if false;
     }
