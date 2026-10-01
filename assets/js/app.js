@@ -7,6 +7,7 @@
    ========================================================= */
 
 const LOJA = {
+  pix: "chave-pix-do-dono@exemplo.com",   // trocar pela chave real do cliente
   freteGratis: 70.00,   // acima disso, entrega grátis (marketing)
   nome: "Forno Nobre",
   /* DEMONSTRAÇÃO: WhatsApp comercial da Criasiteweb.
@@ -1678,3 +1679,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (r) { r.checked = true; r.dispatchEvent(new Event("change", { bubbles: true })); }
   }
 });
+
+/* ---- Pix na hora ---- */
+(function(){
+  const form = document.querySelector("[data-checkout]");
+  const box = document.querySelector("[data-pix-box]");
+  const chaveEl = document.querySelector("[data-pix-chave]");
+  const btn = document.querySelector("[data-pix-copiar]");
+  if(!form || !box) return;
+  if(chaveEl) chaveEl.textContent = (typeof LOJA!=="undefined" && LOJA.pix) ? LOJA.pix : "";
+  const toggle = () => { box.hidden = form.pagamento.value !== "Pix"; };
+  form.pagamento.addEventListener("change", toggle); toggle();
+  if(btn) btn.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(LOJA.pix||""); btn.textContent="Copiado!"; setTimeout(()=>btn.textContent="Copiar",1500); }
+    catch(e){ btn.textContent="Copie manualmente"; }
+  });
+})();

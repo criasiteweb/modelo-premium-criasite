@@ -683,3 +683,11 @@ em{font-style:normal;color:var(--amarelo)}
 .fm-bar i{display:block;height:100%;background:linear-gradient(90deg,#e63022,#ff7a3c);
   border-radius:20px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
 .fm-ok{color:#2ecc71;font-weight:700;font-size:.92rem}
+
+/* ===================== PIX NA HORA ===================== */
+.pix-box{background:rgba(230,48,34,.06);border:1px solid rgba(230,48,34,.25);border-radius:12px;padding:.8rem;margin:.2rem 0 .6rem}
+.pix-topo{font-weight:700;font-size:.92rem;margin-bottom:.5rem}
+.pix-chave{display:flex;gap:.5rem;align-items:center}
+.pix-chave code{flex:1;background:rgba(0,0,0,.25);padding:.5rem .6rem;border-radius:8px;font-size:.85rem;word-break:break-all}
+.pix-copiar{background:#e63022;color:#fff;border:0;border-radius:8px;padding:.5rem .9rem;font-weight:600;cursor:pointer;flex:none}
+.pix-box small{display:block;margin-top:.5rem;color:var(--muted,#b7aea8);font-size:.78rem}
