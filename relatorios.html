@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Relatórios | Forno Nobre</title>
+<link rel="icon" href="assets/img/logo.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/estoque.css" />
+<link rel="stylesheet" href="assets/css/relatorios.css" />
+<script type="module" src="assets/js/relatorios.js" defer></script>
+</head>
+<body>
+<header class="es-topo">
+  <a class="es-voltar" href="painel.html">← Painel</a>
+  <h1>Relatórios do dono</h1>
+</header>
+
+<div class="es-login" data-login hidden>
+  <form data-form-login>
+    <h2>Acesso da loja</h2>
+    <input type="password" placeholder="Senha do painel" data-senha autocomplete="current-password" />
+    <button type="submit">Entrar</button>
+    <p class="es-erro" data-erro hidden></p>
+  </form>
+</div>
+
+<main class="es-app" data-app hidden>
+  <nav class="es-abas">
+    <button class="on" data-per="7">Últimos 7 dias</button>
+    <button data-per="30">Últimos 30 dias</button>
+    <button data-per="0">Tudo</button>
+  </nav>
+
+  <div class="rel-cards">
+    <div class="rel-card"><span>Faturamento</span><b data-fat>—</b></div>
+    <div class="rel-card"><span>Pedidos</span><b data-qtd>—</b></div>
+    <div class="rel-card"><span>Ticket médio</span><b data-ticket>—</b></div>
+    <div class="rel-card"><span>Melhor dia</span><b data-melhordia>—</b></div>
+  </div>
+
+  <section>
+    <h2>🔥 Produtos mais vendidos</h2>
+    <div class="es-lista" data-mais-vendidos></div>
+  </section>
+
+  <section>
+    <h2>⏰ Horário de pico</h2>
+    <div class="rel-horas" data-horas></div>
+  </section>
+
+  <section class="rel-semana">
+    <h2>📊 Resultado da semana (pra mandar no WhatsApp)</h2>
+    <pre data-resumo-semana></pre>
+    <button class="es-add" data-copiar-semana>Copiar resumo</button>
+  </section>
+</main>
+</body>
+</html>
